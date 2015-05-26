@@ -11,12 +11,12 @@
     }
   ],
   "require": {
-    "vrana/notorm": "dev-master"
+    "vrana/notorm": "@dev"
   },
   "require-dev": {
     "tracy/tracy": "v2.3.1"
   },
-  "minimum-stability": "dev",
+  "minimum-stability": "@dev",
   "autoload": {
     "psr-4": {
       "YesORM\\": "src/YesORM",
