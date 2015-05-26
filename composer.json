@@ -11,7 +11,7 @@
     }
   ],
   "require": {
-    "vrana/notorm": "dev"
+    "vrana/notorm": "dev-master"
   },
   "require-dev": {
     "tracy/tracy": "v2.3.1"
