@@ -16,6 +16,7 @@
   "require-dev": {
     "tracy/tracy": "v2.3.1"
   },
+  "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
       "YesORM\\": "src/YesORM",
