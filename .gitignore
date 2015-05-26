@@ -1,0 +1,9 @@
+.idea
+composer.lock
+composer.phar
+vendor
+bin
+tests
+lib
+index.php
+instance.php

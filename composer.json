@@ -1,0 +1,25 @@
+{
+  "name": "mnohosten/yesorm",
+  "description": "YesORM is a PHP library for simple working with data in the database.",
+  "keywords": ["database", "dbal"],
+  "homepage": "http://www.yesorm.com/",
+  "license": ["Apache-2.0", "GPL-2.0+"],
+  "authors": [
+    {
+      "name": "Martin Krizan",
+      "email": "krizamar@gmail.com"
+    }
+  ],
+  "require": {
+    "vrana/notorm": "dev-master"
+  },
+  "require-dev": {
+    "tracy/tracy": "v2.3.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "YesORM\\": "src/YesORM",
+      "YesPanel\\": "src/YesPanel"
+    }
+  }
+}
