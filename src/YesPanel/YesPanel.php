@@ -24,7 +24,7 @@ class YesPanel implements IBarPanel {
 
     public function register(ORM &$db) {
         Debugger::getBar()->addPanel($this);
-        $db->debug = function($query, $parameters, $microtime) {
+        $db->debug = function($query, $parameters, $microtime=null) {
             self::getInstance()->logQuery($query, $parameters, $microtime);
         };
     }
