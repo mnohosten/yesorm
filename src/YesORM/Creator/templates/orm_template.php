@@ -21,7 +21,16 @@ PHP;
 
 echo <<<PHP
  */
-class ORM extends \YesORM\ORM {}
+class ORM extends \YesORM\ORM {
+
+    /**
+     * @return Lexer
+     */
+    function __lx() {
+        return parent::__lx();
+    }
+
+}
 
 PHP;
 

@@ -83,6 +83,10 @@ class ORM extends \NotORM
         return $this->creator;
     }
 
+    public function __lx(){
+        return new LexicalHelper();
+    }
+
 
 
 }

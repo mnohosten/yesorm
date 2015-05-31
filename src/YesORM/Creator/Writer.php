@@ -17,8 +17,19 @@ class Writer {
         $this->cleanup();
         $this->writeORM();
         $this->writeTables();
+        $this->writeLx();
     }
 
+    private function writeLx() {
+        $ns = $this->creator->getNs();
+        $tables = $this->creator->getTables();
+        ob_start();
+        include __DIR__ . "/templates/lx_template.php";
+        $class = ob_get_clean();
+
+        $this->writeToFile($class, 'Lexer.php');
+    }
+    
     private function cleanup() {
         $iterator = new \DirectoryIterator($this->getDir());
         foreach ($iterator as $file) {
