@@ -25,6 +25,7 @@ class Result extends \NotORM_Result {
                 $doLog = true;
             }
         }
+        $this->notORM->__updateRowClass($this->table);
         if($doLog) $stopWatchStart = microtime(true);
         $return = $this->notORM->connection->prepare($query);
         if (!$return || !$return->execute(array_map(array($this, 'formatValue'), $parameters))) {
