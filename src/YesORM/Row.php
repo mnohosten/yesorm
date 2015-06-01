@@ -8,7 +8,16 @@ class Row extends \NotORM_Row {
         return parent::offsetGet($key);
     }
 
-
+    public static function create(ORM $db, $where=[]) {
+        return self::reflection()
+            ->newInstanceArgs([
+                $where,
+                new Result(
+                    self::table(),
+                    $db
+                )
+            ]);
+    }
 
     /** Get referenced row
      * @param string
@@ -73,6 +82,10 @@ class Row extends \NotORM_Row {
         return self::reflection()->getName();
     }
 
+    static function table() {
+        $exp = explode('\\', get_called_class());
+        return end($exp);
+    }
 
     public function __rowClass(){
         return $this->result->rowClass;
