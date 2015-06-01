@@ -16,8 +16,26 @@ class Writer {
     function build() {
         $this->cleanup();
         $this->writeORM();
+        $this->writeTraits();
         $this->writeTables();
         $this->writeLx();
+    }
+
+    private function writeTraits() {
+        $ns = $this->creator->getNs();
+        $tables = $this->creator->getTables();
+        $traitsDir = $this->getDir() . "/traits";
+        foreach ($tables as $table) {
+            $traitPath = $traitsDir . "/" . $table->name() . ".php";
+            if(!file_exists($traitPath)) {
+                ob_start();
+                include __DIR__ . "/templates/trait_template.php";
+                $trait = ob_get_clean();
+                $this->writeToFile($trait, "traits/{$table->name()}.php");
+                chmod($traitPath, 0777);
+            }
+        }
+
     }
 
     private function writeLx() {
