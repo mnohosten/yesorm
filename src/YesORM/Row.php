@@ -95,6 +95,9 @@ class Row extends \NotORM_Row {
     }
 
     function save($data=[], $updateResult=true) {
+        if(array_key_exists($this->result->primary, $data) && !$data[$this->result->primary]) {
+            unset($data[$this->result->primary]);
+        }
         foreach ($data as $k=>$v) {
             $this->offsetSet($k, $v);
         }
