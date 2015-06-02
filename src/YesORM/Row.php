@@ -2,6 +2,7 @@
 
 namespace YesORM;
 
+/** @property \YesORM\Result $result */
 class Row extends \NotORM_Row {
 
     function offsetGet($key) {
@@ -14,7 +15,9 @@ class Row extends \NotORM_Row {
                 $where,
                 new Result(
                     self::table(),
-                    $db
+                    $db,
+                    false,
+                    $where
                 )
             ]);
     }
@@ -89,5 +92,34 @@ class Row extends \NotORM_Row {
 
     public function __rowClass(){
         return $this->result->rowClass;
+    }
+
+    function save($data=[], $updateResult=true) {
+        foreach ($data as $k=>$v) {
+            $this->offsetSet($k, $v);
+        }
+        if(isset($this[$this->result->primary])) { // update
+            $this->update();
+        } else { // insert
+            $item = $this->__ORM()->{$this->result->table}()->insert($this->__toArray());
+            if($item) {
+                foreach ($item as $k=>$v) {
+                    $this->offsetSet($k, $v);
+                }
+                if($updateResult) {
+                    $item = $this->__ORM()
+                        ->{$this->result->table}([$this->result->primary => $item[$this->result->primary]])
+                        ->limit(1)->fetch();
+                    if($item) {
+                        $this->result = $item->__result();
+                    }
+                }
+            }
+        }
+        return $this;
+    }
+
+    function __result() {
+        return $this->result;
     }
 }

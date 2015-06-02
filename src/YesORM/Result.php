@@ -5,6 +5,20 @@ namespace YesORM;
 class Result extends \NotORM_Result {
 
 
+    function __construct($table, ORM $notORM, $single = false, $where=array()) {
+        parent::__construct($table, $notORM, $single);
+        if(array_key_exists($notORM->structure->getPrimary($table), $where)) {
+            $this->access = array(
+                $notORM->structure->getPrimary($table) => true,
+            );
+            $this->notORM->__updateRowClass($table);
+            $id = $where[$notORM->structure->getPrimary($table)];
+            $this->rows = [
+                $id => new $this->notORM->rowClass($where, $this)
+            ];
+            $this->data = $this->rows;
+        }
+    }
 
     protected function query($query, $parameters) {
         $doLog = false;
