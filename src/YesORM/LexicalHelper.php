@@ -36,7 +36,7 @@ class LexicalHelper extends \ArrayIterator {
     }
 
     function __toString() {
-        return $this->_s();
+        return $this->_w();
     }
 
     function container() {

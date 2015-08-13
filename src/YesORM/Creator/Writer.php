@@ -93,7 +93,7 @@ class Writer {
     }
 
     private function getDir() {
-        $path = $this->creator->getLibPath() . "/" . $this->creator->getNs();
+        $path = $this->creator->getLibPath() . "/" . str_replace('\\', DIRECTORT_SEPARATOR, $this->creator->getNs());
         if(!file_exists($path)) {
             mkdir($path, 0777, true);
         }
